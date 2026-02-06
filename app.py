@@ -259,15 +259,15 @@ if prompt:
     with st.chat_message("assistant"):
         st.markdown(response_text)
         
-        # ElevenLabs Generation
-        with st.spinner(f"🔊 Synthesizing Voice ({selected_voice_name})..."):
-            audio_bytes = generate_elevenlabs_audio(response_text, elevenlabs_api_key, selected_voice_id)
-            
-            if audio_bytes:
-                # ΧΡΗΣΗ ΤΗΣ ΝΕΑΣ ΛΕΙΤΟΥΡΓΙΑΣ AUTOPLAY
-                autoplay_audio(audio_bytes)
-            else:
-                st.warning("⚠️ Voice Generation Failed (Check Logs).")
+        # --- ElevenLabs Generation DISABLED (COMMENTED OUT) ---
+        # with st.spinner(f"🔊 Synthesizing Voice ({selected_voice_name})..."):
+        #     audio_bytes = generate_elevenlabs_audio(response_text, elevenlabs_api_key, selected_voice_id)
+        #     
+        #     if audio_bytes:
+        #         # ΧΡΗΣΗ ΤΗΣ ΝΕΑΣ ΛΕΙΤΟΥΡΓΙΑΣ AUTOPLAY
+        #         autoplay_audio(audio_bytes)
+        #     else:
+        #         st.warning("⚠️ Voice Generation Failed (Check Logs).")
         
         # --- LOGS & DEBUGGING (COMPLETE ENTERPRISE VIEW) ---
         with st.expander("🛠️ System Logs (Debug Info)"):
@@ -275,10 +275,9 @@ if prompt:
             [INFO] Timestamp: {datetime.datetime.now()}
             [INFO] User Role: {user_role}
             [INFO] Latency: {latency}s
-            [VOICE] Provider: ElevenLabs
+            [VOICE] Provider: ElevenLabs (DISABLED)
             [VOICE] Model: eleven_multilingual_v2
             [VOICE] ID: {selected_voice_id}
-            [STATUS] Audio Generated: {'YES' if audio_bytes else 'NO'}
             """, language="yaml")
 
     st.session_state.messages.append({"role": "assistant", "content": response_text})
